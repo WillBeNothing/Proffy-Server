@@ -1,14 +1,19 @@
-## Funcionalidades
+## APLICAÇÃO CONSTRUIDA NA NLW#2 JUNTAMENTE COM A ROCKETSEAT
 
-## Connexões
+O Proffy é uma aplicação que visa conectar alunos e professores.
+A platarfoma disponibiliza aos dois dinamismo e velocidade
 
-- [X]Rota para lista total de conexões realizadas
-- [X]Rota para criação de conexões
+Aplicação Mobile: 
 
+Disponivel somente para android!
 
-## Aulas
+Favorite seus Proffys agora mesmos,
 
-- [X]Rota  pra criar aula
-- [X]Rota pra listar aulas
-    - [X]Filtrar por matéria, dia da semana, Horário
-    
+Layout limpo e charmoso
+
+Link repositório Proffy-WEB : 
+https://github.com/william4823/Proffy-Web
+
+Link repositório Proffy-MOBILE: 
+https://github.com/william4823/Proffy-Mobile
+
