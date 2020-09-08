@@ -9,7 +9,7 @@ export async function up(Knex: Knex) {
         table.integer('user_id').
         notNullable().
         references('id').
-        inTable('users').
+        inTable('proffys').
         onDelete('CASCADE').
         onUpdate('CASCADE')
 

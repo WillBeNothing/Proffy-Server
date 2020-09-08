@@ -1,5 +1,15 @@
-const knexfile = require("../../knexfile")
-const knex = require('knex')(knexfile['development'])
+import Knex from 'knex'
+
+const db = Knex({
+    client: 'pg',
+    connection: {
+        host: 'localhost',
+        user: 'postgres',
+        password: 'docker',
+        database: 'Proffy'
+    },
+    useNullAsDefault: true
+})
 
 
-export default knex
+export default db

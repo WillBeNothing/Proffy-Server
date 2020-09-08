@@ -10,9 +10,8 @@ interface Scheduleitem {
 }
 
 class ClassesControler {
-    async  store(req: Request, res: Response) {
+    async  store(req: any, res: Response) {
         const {name,
-            avatar,
             whatsapp,
             bio,
             subject,
@@ -23,19 +22,23 @@ class ClassesControler {
             const trx = await knex.transaction()
     
            try {
+               
+            const getUser = await knex('users').where('id', req.userid).returning('avatar_url')
+            
     
-            var created_user = await trx('users').insert({
-                name,
-                avatar,
+            var created_user = await knex('proffys').insert({
+                name: getUser[0].name,
+                avatar_url: getUser[0].avatar_url,
                 whatsapp,
-                bio
+                bio,
+                user_id: getUser[0].id
             }).returning('id')
     
             var user_id = created_user[0]
            
            
     
-            const insertedclassesID = await trx('classes').insert({
+            const insertedclassesID = await knex('classes').insert({
                 subject,
                 cost,
                 user_id
@@ -54,9 +57,8 @@ class ClassesControler {
                 }
             })
     
-            await trx('class_schedule').insert(class_schedule)
+            await knex('class_schedule').insert(class_schedule)
     
-            await trx.commit()
     
             
             return res.json().status(201)
@@ -66,7 +68,7 @@ class ClassesControler {
                  
                 trx.rollback()
                 console.log(err)
-                return res.json({users: created_user}).status(400)
+               
            }
     
     
@@ -96,11 +98,10 @@ try{
 	    .whereRaw('class_schedule.to > ??', [TimeInMinutes])
 	})
 	.where('classes.subject', '=', subject)
-	.join('users', 'classes.user_id', '=', 'users.id')
-	.select(['classes.*', 'users.*'])
+	.join('proffys', 'classes.user_id', '=', 'proffys.id')
+	.select(['classes.*', 'proffys.*'])
 
 return res.json(classes)
-
 } catch(err) {
     
     return res.json()
